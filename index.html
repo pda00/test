@@ -118,7 +118,7 @@
 
 
             Quagga.onDetected(function (result) {
-                document.getElementById('results').textContent(result.codeResult.code);
+                document.getElementById('results').textContent=result.codeResult.code;
                 Quagga.stop();
                 _scannerIsRunning=false;
                 //console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
