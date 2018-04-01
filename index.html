@@ -1,5 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>body{color:white}</style>
+    <input type="file" id="file" onchange="readURL(this)" />
+    <img id="img" style="display:none">
+    <button onclick="test()">sub</button>
+    <div id="results"></div>
+
+    <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+    <script>
+    function readURL(input) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById('img').src=e.target.result
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+    function test(){
+    Quagga.decodeSingle({
+    decoder: {
+        readers: ["code_39_vin_reader"] // List of active readers
+    },
+    locate: true, // try to locate the barcode in the image
+    // You can set the path to the image in your server
+    // or using it's base64 data URI representation data:image/jpg;base64, + data
+    src: document.getElementById('img').src
+}, function(result){
+    if(result.codeResult) {
+        console.log("result", result.codeResult.code);
+    } else {
+        console.log("not detected");
+    }
+});
+};
+
+    </script>
+<!--
 <head>
     <title></title>
     <meta charset="UTF-8">
@@ -116,5 +151,5 @@
         }, false);
     </script>
 </body>
-
+-->
 </html>
