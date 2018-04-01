@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>body{color:white}</style>
     <input type="file" id="file" onchange="readURL(this)" />
     <img id="img" style="display:none">
     <button onclick="test()">sub</button>
@@ -26,9 +25,11 @@
     src: document.getElementById('img').src
 }, function(result){
     if(result.codeResult) {
-        console.log("result", result.codeResult.code);
+        document.getElementById('results').textContent=result.codeResult.code;
+        //console.log("result", result.codeResult.code);
     } else {
-        console.log("not detected");
+        document.getElementById('results').textContent='not detected';
+        //console.log("not detected");
     }
 });
 };
