@@ -100,8 +100,8 @@
 
 
             Quagga.onDetected(function (result) {
-                document.getElementById('results').appendChild(document.createTextContent(result));
-                //console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+                //document.getElementById('results').appendChild(document.createTextContent(result));
+                console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
             });
         }
 
