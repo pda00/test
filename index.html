@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title></title>
     <meta charset="UTF-8">
@@ -24,7 +23,6 @@
     <!-- Include the image-diff library -->
 <!-- Or use a CDN -->
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
-    
     <script>
         var _scannerIsRunning = false;
 
@@ -42,15 +40,7 @@
                 },
                 decoder: {
                     readers: [
-                        "code_128_reader",
-                        "ean_reader",
-                        "ean_8_reader",
-                        "code_39_reader",
                         "code_39_vin_reader",
-                        "codabar_reader",
-                        "upc_reader",
-                        "upc_e_reader",
-                        "i2of5_reader"
                     ],
                     debug: {
                         showCanvas: true,
@@ -107,8 +97,10 @@
 
 
             Quagga.onDetected(function (result) {
-                //document.getElementById('results').appendChild(document.createTextContent(result));
-                console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+                document.getElementById('results').textContent(result.codeResult.code);
+                Quagga.stop();
+                _scannerIsRunning=false;
+                //console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
             });
         }
 
@@ -117,6 +109,7 @@
         document.getElementById("btn").addEventListener("click", function () {
             if (_scannerIsRunning) {
                 Quagga.stop();
+                _scannerIsRunning=false;
             } else {
                 startScanner();
             }
