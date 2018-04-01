@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* In order to place the tracking correctly */
         canvas.drawing, canvas.drawingBuffer {
             position: absolute;
             left: 0;
@@ -15,26 +14,20 @@
 </head>
 
 <body>
-    <!-- Div to show the scanner -->
     <div id="scanner-container"></div>
     <input type="button" id="btn" value="Start/Stop the scanner" />
     <div id="results"></div>
 
-    <!-- Include the image-diff library -->
-<!-- Or use a CDN -->
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
     <script>
         var _scannerIsRunning = false;
         function startScanner() {
-
-                
-                                    //"decoder":{"readers":[{"format":"code_39_vin_reader","config":{}}]},"locate":true}
             Quagga.init({
                 inputStream:{
                     type:"LiveStream",
                     constraints: {
-                        width: {min:640},
-                        height: {min:480},
+                        width: {min:480},
+                        height: {min:360},
                         aspectRatio: {min:1,max:100},
                         facingMode:"environment"
                     },
@@ -42,22 +35,9 @@
                     locator: {patchSize:"medium",halfSample:true},
                     numOfWorkers:2,frequency:10,
                 },
-                /*
-                inputStream: {
-                    name: "Live",
-                    type: "LiveStream",
-                    target: document.querySelector('#scanner-container'),
-                    constraints: {
-                        width: 640,
-                        height: 480,
-                        facingMode: "environment"
-                    },
-                },
-                */
                 decoder: {
                     readers: [
                         {format:"code_39_vin_reader",config:{}}
-                        //"code_39_vin_reader",
                     ],
                     locate:true,
                     
@@ -121,7 +101,6 @@
                 document.getElementById('results').textContent=result.codeResult.code;
                 Quagga.stop();
                 _scannerIsRunning=false;
-                //console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
             });
         }
 
